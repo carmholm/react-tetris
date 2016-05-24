@@ -43,17 +43,24 @@ function Row(props) {
     )
 }
 
+
+// Row(object);
+// object = {
+//     row: aRow,
+//     index: index
+// }
+
 function Grid(props) {
 
     var currentX = props.activePiece.activePiecePosition.x / constants.GRID_COLS * 100;
     var currentY = props.activePiece.activePiecePosition.y / constants.GRID_ROWS * 100;
-    
+
     return (
         <div className="container">
             <div className="grid">
-            {   
+            {
                 props.grid.map(
-                    (row, index) => <Row row={row} key={"r"+index} />
+                    (row, index) => <Row row={row} key={"r"+index}/>
                 )
             }
             </div>
@@ -84,4 +91,3 @@ module.exports={
     GetInitialGrid: GetInitialGrid,
     Grid: Grid
 }
-

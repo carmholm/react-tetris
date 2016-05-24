@@ -92,6 +92,7 @@ function canRotate(currGrid, currTet, currTetX){
 	} 
 }
 
+
 function rotateRight(array){
     var n = array.length;
     var rotated = [];
@@ -194,15 +195,12 @@ class App extends React.Component{
 				return;
 		}
 	}
-	// handleKeyup(e){
-	// 	if (e.which === 40){
-	// 		this.hardDrop = false;
-	// 	}
-	// }
+
 	updateGameState(){
 		var currentState=this.state;
 		var y = currentState.activePiecePosition.y;
 		var elapsedSeconds = (new Date() - this.state.pieceStartTime)/1000;
+
 		if(canMoveDown(this.state.grid, this.state.activePiece, this.state.activePiecePosition.y)){
 			var newY = constants.Y_START + elapsedSeconds;
 			this.state.activePiecePosition.y=newY;
@@ -222,6 +220,7 @@ class App extends React.Component{
     	);
   	}
 }
+
 
 
 // class App extends React.Component {
