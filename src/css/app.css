@@ -1,0 +1,71 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+}
+
+
+.emptyCell {
+    height: 50px;
+    width: 50px;
+}
+
+.I {
+    height: 50px;
+    width: 50px;
+    background-color: cyan;
+    border: 1px solid cyan;
+}
+
+.J {
+    height: 50px;
+    width: 50px;
+    background-color: blue;
+    border: 1px solid blue;
+}
+
+.L {
+    height: 50px;
+    width: 50px;
+    background-color: orangered;
+    border: 1px solid orangered;
+}
+
+.O {
+    height: 50px;
+    width: 50px;
+    background-color: yellow;
+    border: 1px solid yellow;
+}
+
+.S {
+    height: 50px;
+    width: 50px;
+    background-color: green;
+    border: 1px solid green;
+}
+
+.T {
+    height: 50px;
+    width: 50px;
+    background-color: purple;
+    border: 1px solid purple;
+}
+
+.Z {
+    height: 50px;
+    width: 50px;
+    background-color: red;
+    border: 1px solid red;
+}
+
+.container{
+    position: relative;
+    width: 500px;
+    border: 1px solid black;
+}
+
