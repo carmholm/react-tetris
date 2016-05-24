@@ -32,6 +32,7 @@ function Grid(props) {
                     (row, index) => <Row row={row} key={"r"+index}/>
                 )
             }
+            </div>
             <div className="currentPiece"  style={{position: "absolute", top: currentY + "%", left: currentX + "%"}}>
                 {   
                     props.activePiece.activePiece.map(
@@ -39,8 +40,6 @@ function Grid(props) {
                     )
                 }
             </div>
-            </div>
-
         </div>
     )
 }

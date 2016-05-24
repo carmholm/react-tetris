@@ -1,25 +1,29 @@
 *{
     box-sizing: border-box;
+    margin: 0;
 }
 
 .row {
     display: flex;
+    justify-content: center;
 }
 
 
 .emptyCell {
     height: 50px;
     width: 50px;
-    border: 1px solid black;
 }
 
 .fullCell {
     height: 50px;
     width: 50px;
     background-color: red;
+    border: 1px solid black;
 }
 
-.grid{
+.container{
     position: relative;
+    width: 500px;
+    border: 1px solid black;
 }
 
