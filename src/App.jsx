@@ -4,11 +4,21 @@ import constants from './constants.js';
 import Grid from './components/grid.jsx';
 
 
+function rotateRight(array){
+    var n = array.length;
+    var rotated = [];
+	array.map(function(row, i){
+		rotated[i]=[];
+		row.map(function(cell, j){
+			rotated[i][j] = array[n-j-1][i]
+		})
+	})
+    return rotated;
+}
+
 function getTets(){
 	var pieces = ['I', 'J', 'Z', 'S', 'O', 'L', 'T'];
 	var randomNumber = Math.floor(Math.random()*7);
-	
-	console.log(constants.SHAPES[pieces[randomNumber]]);
 	return constants.SHAPES[pieces[randomNumber]];
 }
 
@@ -26,9 +36,44 @@ class App extends React.Component{
 			pieceStartTime: new Date()
 		}
 	this.updateGameState=this.updateGameState.bind(this);
+	this.handleKeydown=this.handleKeydown.bind(this);
 	}
 	componentDidMount(){
+		document.addEventListener('keydown', this.handleKeydown);
+		document.addEventListener('keyup', this.handleKeyup);
 		this.updateGameState();
+	}
+	//right 39
+	//left 37
+	//up 38
+	//down 40
+	handleKeydown(e){
+		console.log(e.which)
+		switch(e.which){
+			case 39:
+				var x = this.state.activePiecePosition.x;
+				var newX = x + 1;
+				this.state.activePiecePosition.x=newX;
+				this.setState({activePIecePosition: this.state.activePiecePosition});
+				return;
+			case 37:
+				var x = this.state.activePiecePosition.x;
+				var newX = x - 1;
+				this.state.activePiecePosition.x=newX;
+				this.setState({activePIecePosition: this.state.activePiecePosition});
+				return;
+			case 38:
+				this.setState({activePiece: rotateRight(this.state.activePiece)});
+				return;
+			case 40:
+				this.hardDrop = true;
+				return;
+		}
+	}
+	handleKeyup(e){
+		if (e.which === 40){
+			this.hardDrop = false;
+		}
 	}
 	updateGameState(){
 		var currentState=this.state;
