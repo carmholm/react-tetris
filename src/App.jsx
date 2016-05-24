@@ -16,10 +16,30 @@ function rotateRight(array){
     return rotated;
 }
 
-function getTets(){
-	var pieces = ['I', 'J', 'Z', 'S', 'O', 'L', 'T'];
-	var randomNumber = Math.floor(Math.random()*7);
-	return constants.SHAPES[pieces[randomNumber]];
+function shuffleBag() {
+	var array = ['I', 'J', 'Z', 'S', 'O', 'L', 'T'];	
+	var arrLength = array.length;
+
+    while (arrLength > 0) {
+        var index = Math.floor(Math.random() * arrLength);
+        arrLength--;
+        var temp = array[arrLength];
+        array[arrLength] = array[index];
+        array[index] = temp;
+    }
+    return array;
+}
+
+
+function getGamePieces(){
+    var array = [];
+    var i=0;
+    while (i<150){
+       array.push(shuffleBag()) 
+       i++;
+}
+    var gamePieces = [].concat.apply([], array);
+    return gamePieces;
 }
 
 
@@ -28,7 +48,8 @@ class App extends React.Component{
 		super();
 		this.state={
 			grid: Grid.GetInitialGrid(constants.GRID_ROWS, constants.GRID_COLS),
-			activePiece: getTets(),
+			gameBag : getGamePieces(),
+			activePiece: null,
 			activePiecePosition: {
 				x: 3,
 				y: -3
@@ -41,6 +62,9 @@ class App extends React.Component{
 	componentDidMount(){
 		document.addEventListener('keydown', this.handleKeydown);
 		document.addEventListener('keyup', this.handleKeyup);
+		this.setState({
+			activePiece : this.state.gameBag[0]
+		})
 		this.updateGameState();
 	}
 	//right 39
@@ -87,21 +111,21 @@ class App extends React.Component{
 		})
 		requestAnimationFrame(this.updateGameState);
 	}
-// 	updateGameState() {
-//     //... code
-//     var currentState = this.state;
+	updateGameState() {
+    //... code
+    var currentState = this.state;
     
-//     var elapsed = new Date() - this.state.startTime
+    var elapsed = new Date() - this.state.startTime
     
-//     if (this.hardDrop) {
-//       //go faster
-//     }
-//     //check if piece can go down
-//     //if not, merge with board, setState
-//     // setState ? but not always
+    if (this.hardDrop) {
+      //go faster
+    }
+    //check if piece can go down
+    //if not, merge with board, setState
+    // setState ? but not always
     
-//     requestAnimationFrame(this.updateGameState);
-//   }
+    requestAnimationFrame(this.updateGameState);
+  }
   	render() {
     	return (
         	<div>
@@ -112,72 +136,72 @@ class App extends React.Component{
 }
 
 
-// class App extends React.Component {
-//   constructor(props) {
-//     super()
-//     this.updateGamestate= this.updateGamestate.bind(this);
-//     // do it for the others
+class App extends React.Component {
+  constructor(props) {
+    super()
+    this.updateGamestate= this.updateGamestate.bind(this);
+    // do it for the others
     
-//     this.state = {
-//       board: [
+    this.state = {
+      board: [
         
-//       ],
-//       currentPiece: {
+      ],
+      currentPiece: {
         
-//       },
-//       startTime: new Date()
-//     }
-//   }
-//   componentDidMount() {
-//     document.addEventListener('keydown', this.keyDown);
-//     document.addEventListener('keyup', this.keyUp);
-//     //socket.on('handicap', this.handicap)
-//     this.updateGamestate();
-//   }
+      },
+      startTime: new Date()
+    }
+  }
+  componentDidMount() {
+    document.addEventListener('keydown', this.keyDown);
+    document.addEventListener('keyup', this.keyUp);
+    //socket.on('handicap', this.handicap)
+    this.updateGamestate();
+  }
   
   
-//   keyDown(e) {
-//     if (e.which === UP){rotate()} //up
-//     if (e.which === RIGHT) {x+=1}
-//     if (e.which === DOWN) {this.hardDrop=true}
-//     // use e.which to figure out which key is down
-//     // let's say that the user presed the DOWN key
-//     // this.downKey = true;
-//   }
+  keyDown(e) {
+    if (e.which === UP){rotate()} //up
+    if (e.which === RIGHT) {x+=1}
+    if (e.which === DOWN) {this.hardDrop=true}
+    // use e.which to figure out which key is down
+    // let's say that the user presed the DOWN key
+    // this.downKey = true;
+  }
   
-//   keyUp(e) {
-//     // use e.which to figure out which key is down
-//     // let's say that the user presed the DOWN key
+  keyUp(e) {
+    // use e.which to figure out which key is down
+    // let's say that the user presed the DOWN key
     
-//     // this.hardDrop = false;
-//   }
+    // this.hardDrop = false;
+  }
   
-//   updateGameState() {
-//     //... code
-//     var currentState = this.state;
+  updateGameState() {
+    //... code
+    var currentState = this.state;
     
-//     var elapsed = new Date() - this.state.startTime
+    var elapsed = new Date() - this.state.startTime
     
-//     if (this.hardDrop) {
-//       //go faster
-//     }
-//     //check if piece can go down
-//     //if not, merge with board, setState
-//     // setState ? but not always
+    if (this.hardDrop) {
+      //go faster
+    }
+    //check if piece can go down
+    //if not, merge with board, setState
+    // setState ? but not always
     
-//     requestAnimationFrame(this.updateGameState);
-//   }
+    requestAnimationFrame(this.updateGameState);
+  }
   
-//   render() {
-//     return (
-//         <div>
-//             {/*Application body*/}
-//         </div>
-//     );
-//   }
-// }
+  render() {
+    return (
+        <div>
+            {/*Application body*/}
+        </div>
+    );
+  }
+}
 
-// App.propTypes = {};
-// App.defaultProps = {};
+App.propTypes = {};
+App.defaultProps = {};
 
 ReactDOM.render(<App />, document.querySelector('#app'));
