@@ -1,0 +1,25 @@
+*{
+    box-sizing: border-box;
+}
+
+.row {
+    display: flex;
+}
+
+
+.emptyCell {
+    height: 50px;
+    width: 50px;
+    border: 1px solid black;
+}
+
+.fullCell {
+    height: 50px;
+    width: 50px;
+    background-color: red;
+}
+
+.grid{
+    position: relative;
+}
+
